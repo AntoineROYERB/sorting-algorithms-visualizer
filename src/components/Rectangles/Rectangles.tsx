@@ -1,12 +1,20 @@
 import React from "react";
 import "./Rectangles.css";
 
-export default function Rectangles() {
+const RepeatDiv = ({ numberOfTimes }) => (
+  <>
+    {Array.from({ length: numberOfTimes }).map((_, index) => (
+      <div key={index} className="rectangle"></div>
+    ))}
+  </>
+);
+
+export default function Rectangles({ sliderValue }) {
   return (
     <>
-      <div className="rectangle" />
-      <div className="rectangle" />
-      <div className="rectangle" />
+      <div className="container">
+        <RepeatDiv numberOfTimes={sliderValue} />
+      </div>
     </>
   );
 }

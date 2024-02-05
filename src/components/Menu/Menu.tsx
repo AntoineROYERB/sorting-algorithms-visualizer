@@ -23,35 +23,79 @@ import AdbIcon from "@mui/icons-material/Adb";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-function ColorToggleButton() {
-  const [alignment, setAlignment] = React.useState("web");
+// function ColorToggleButton() {
+//   const [alignment, setAlignment] = React.useState("web");
 
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
-  ) => {
-    setAlignment(newAlignment);
+//   const handleChange = (
+//     event: React.MouseEvent<HTMLElement>,
+//     newAlignment: string
+//   ) => {
+//     setAlignment(newAlignment);
+//   };
+
+//   return (
+//     <ToggleButtonGroup
+//       color="primary"
+//       value={alignment}
+//       exclusive
+//       onChange={handleChange}
+//       aria-label="Platform"
+//     >
+//       <ToggleButton value="web">Bubble Sort</ToggleButton>
+//       <ToggleButton value="android">Quick Sort</ToggleButton>
+//       <ToggleButton value="ios">Merge Sort</ToggleButton>
+//     </ToggleButtonGroup>
+//   );
+// }
+
+import { Theme, useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import FormHelperText from "@mui/material/FormHelperText";
+
+function SelectLabels() {
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value);
   };
 
   return (
-    <ToggleButtonGroup
-      color="primary"
-      value={alignment}
-      exclusive
-      onChange={handleChange}
-      aria-label="Platform"
-    >
-      <ToggleButton value="web">Bubble Sort</ToggleButton>
-      <ToggleButton value="android">Quick Sort</ToggleButton>
-      <ToggleButton value="ios">Merge Sort</ToggleButton>
-    </ToggleButtonGroup>
+    <div>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-helper-label">Algorithm</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={age}
+          label="Algorithm"
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+        {/* <FormHelperText>With label + helper text</FormHelperText> */}
+      </FormControl>
+    </div>
   );
 }
 
-function ColorButtons() {
-  return;
-  <Button color="success">Success</Button>;
-}
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -113,32 +157,22 @@ const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
-    <AppBar position="static">
+    <AppBar
+      style={{
+        background: "#2E3B55",
+        display: "flex",
+      }} /*position="static" */
+    >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar
+          disableGutters
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+          }}
+        >
           {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           {/* <Typography
             variant="h6"
@@ -159,8 +193,8 @@ function ResponsiveAppBar() {
           </Typography> */}
           <InputSlider />
           <Button color="success">SORT</Button>
-          <ColorToggleButton />
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <SelectLabels />
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -196,8 +230,8 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
+          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -214,7 +248,7 @@ function ResponsiveAppBar() {
             }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
           {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -226,7 +260,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box> */}
-          <Box sx={{ flexGrow: 0 }}>
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -254,7 +288,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>

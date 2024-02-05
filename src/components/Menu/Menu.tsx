@@ -6,22 +6,14 @@ import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
 
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import Container from "@mui/material/Container";
+
+import MenuItem from "@mui/material/MenuItem";
 
 // function ColorToggleButton() {
 //   const [alignment, setAlignment] = React.useState("web");
@@ -48,12 +40,9 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 //   );
 // }
 
-import { Theme, useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import FormHelperText from "@mui/material/FormHelperText";
 
 function SelectLabels() {
   const [age, setAge] = React.useState("");
@@ -85,17 +74,6 @@ function SelectLabels() {
     </div>
   );
 }
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -153,16 +131,14 @@ function InputSlider() {
   );
 }
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-function ResponsiveAppBar() {
+export default function ResponsiveAppBar() {
   return (
     <AppBar
       style={{
         background: "#2E3B55",
         display: "flex",
-      }} /*position="static" */
+      }}
+      position="static"
     >
       <Container maxWidth="xl">
         <Toolbar
@@ -294,4 +270,3 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;

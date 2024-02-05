@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
 import ResponsiveAppBar from "../Menu/Menu.tsx";
+import Rectangles from "../Rectangles/Rectangles.tsx";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header"></header>
+    <>
       <ResponsiveAppBar />
-    </div>
+      <Rectangles />
+    </>
   );
 }
 

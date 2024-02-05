@@ -1,17 +1,113 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Slider from "@mui/material/Slider";
+import MuiInput from "@mui/material/Input";
+
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+
+import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+function ColorToggleButton() {
+  const [alignment, setAlignment] = React.useState("web");
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
+    setAlignment(newAlignment);
+  };
+
+  return (
+    <ToggleButtonGroup
+      color="primary"
+      value={alignment}
+      exclusive
+      onChange={handleChange}
+      aria-label="Platform"
+    >
+      <ToggleButton value="web">Bubble Sort</ToggleButton>
+      <ToggleButton value="android">Quick Sort</ToggleButton>
+      <ToggleButton value="ios">Merge Sort</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}
+
+function ColorButtons() {
+  return;
+  <Button color="success">Success</Button>;
+}
+
+const Input = styled(MuiInput)`
+  width: 42px;
+`;
+
+function InputSlider() {
+  const [value, setValue] = React.useState(30);
+
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    setValue(newValue as number);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value === "" ? 0 : Number(event.target.value));
+  };
+
+  const handleBlur = () => {
+    if (value < 0) {
+      setValue(0);
+    } else if (value > 100) {
+      setValue(100);
+    }
+  };
+
+  return (
+    <Box sx={{ width: 250 }}>
+      <Typography id="input-slider" gutterBottom>
+        Number of columns & speed
+      </Typography>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs>
+          <Slider
+            value={typeof value === "number" ? value : 0}
+            onChange={handleSliderChange}
+            aria-labelledby="input-slider"
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            value={value}
+            size="small"
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            inputProps={{
+              step: 10,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -43,8 +139,8 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
+          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -60,8 +156,10 @@ function ResponsiveAppBar() {
             }}
           >
             LOGO
-          </Typography>
-
+          </Typography> */}
+          <InputSlider />
+          <Button color="success">SORT</Button>
+          <ColorToggleButton />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -117,7 +215,7 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -127,8 +225,7 @@ function ResponsiveAppBar() {
                 {page}
               </Button>
             ))}
-          </Box>
-
+          </Box> */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

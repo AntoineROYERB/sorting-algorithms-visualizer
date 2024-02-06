@@ -17,7 +17,7 @@ function App() {
         algorithm={algorithm}
         onAlgorithmChange={(newAlgorithm) => setAlgorithm(newAlgorithm)}
       />
-      <Rectangles sliderValue={sliderValue} />
+      <Rectangles sliderValue={sliderValue} algorithm={algorithm} />
     </>
   );
 }

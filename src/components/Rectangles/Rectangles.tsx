@@ -23,10 +23,6 @@ const generateRandomArray = ({ n, size = 100 }) => {
   let randomArray: Array<number> = [];
   let randomNumber: number;
 
-  // // Initialisation du générateur pseudo-aléatoire
-  // Math.seedrandom(seed);
-
-  // Génération du tableau d'entiers aléatoires
   for (let i = 0; i < n; i++) {
     randomNumber = Math.floor(Math.random() * (size + 1));
     randomArray.push(randomNumber as never);
@@ -50,7 +46,8 @@ const RepeatDiv = ({ numberOfTimes }) => {
   );
 };
 
-export default function Rectangles({ sliderValue }) {
+export default function Rectangles({ sliderValue, algorithm }) {
+  console.log(sliderValue, algorithm);
   return (
     <>
       <div className="container">

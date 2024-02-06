@@ -23,9 +23,9 @@ function SelectAlgorithm({ algorithm, onAlgorithmChange }) {
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={algorithm ? algorithm.props.value : ""}
+          value={typeof algorithm === "string" ? algorithm : ""}
           label="Algorithm"
-          onChange={(event, newAlgorithm) => onAlgorithmChange(newAlgorithm)}
+          onChange={(event) => onAlgorithmChange(event.target.value as string)}
         >
           {algorithms.map((algorithm) => {
             return (
@@ -40,11 +40,7 @@ function SelectAlgorithm({ algorithm, onAlgorithmChange }) {
   );
 }
 
-function InputSlider({ onSliderChange, sliderValue }) {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSliderChange(event.target.value === "" ? 0 : Number(event.target.value));
-  };
-
+function InputSlider({ sliderValue, onSliderChange }) {
   const handleBlur = () => {
     if (sliderValue < 0) {
       onSliderChange(0);

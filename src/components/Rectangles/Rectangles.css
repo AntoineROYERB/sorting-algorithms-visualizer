@@ -1,21 +1,20 @@
 * {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
-  justify-content: center;
   max-width: 70%;
-  border: 2px solid red;
+  height: 40em;
+  /* border: red solid 2px; */
 }
 
 .rectangle {
   display: inline-block;
-  height: 603px;
+  height: 100%;
   width: 112px;
   margin-left: 10px;
-
   background-color: rgba(66, 134, 244, 0.8);
-  color: black;
 }

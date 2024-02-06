@@ -5,13 +5,18 @@ import Rectangles from "../Rectangles/Rectangles.tsx";
 
 function App() {
   const [sliderValue, setSliderValue] = React.useState(30);
+  const [algorithm, setAlgorithm] = React.useState("");
 
-  const handleSliderChange = (newValue: number) => {
-    setSliderValue(newValue);
-  };
   return (
     <>
-      <ResponsiveAppBar onSliderChange={handleSliderChange} />
+      <ResponsiveAppBar
+        sliderValue={sliderValue}
+        onSliderChange={(newValue) => {
+          setSliderValue(newValue);
+        }}
+        algorithm={algorithm}
+        onAlgorithmChange={(newAlgorithm) => setAlgorithm(newAlgorithm)}
+      />
       <Rectangles sliderValue={sliderValue} />
     </>
   );

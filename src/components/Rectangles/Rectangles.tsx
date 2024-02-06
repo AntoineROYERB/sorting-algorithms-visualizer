@@ -16,8 +16,6 @@ const BubbleSort = (arr: Array<Number>) => {
       }
     }
   }
-
-  // Print the sorted array
   return arr;
 };
 
@@ -39,7 +37,6 @@ const generateRandomArray = ({ n, size = 100 }) => {
 const RepeatDiv = ({ numberOfTimes }) => {
   const ArrayToSort = generateRandomArray({ n: numberOfTimes });
 
-  console.log(ArrayToSort);
   return (
     <>
       {ArrayToSort.map((rectangleHeight, index) => (

@@ -4,13 +4,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
-import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import MuiInput from "@mui/material/Input";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
-import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
@@ -68,6 +65,7 @@ export default function ResponsiveAppBar({
   sliderValue,
   onAlgorithmChange,
   algorithm,
+  onClickSort,
 }) {
   return (
     <AppBar
@@ -90,7 +88,9 @@ export default function ResponsiveAppBar({
             sliderValue={sliderValue}
             onSliderChange={onSliderChange}
           />
-          <Button color="success">SORT</Button>
+          <Button variant="contained" color="success" onClick={onClickSort}>
+            SORT
+          </Button>
           <SelectAlgorithm
             algorithm={algorithm}
             onAlgorithmChange={onAlgorithmChange}

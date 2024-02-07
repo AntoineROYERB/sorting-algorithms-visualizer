@@ -18,3 +18,7 @@
   margin-left: 10px;
   background-color: rgba(66, 134, 244, 0.8);
 }
+
+.rectangle.active {
+  background-color: red; /* Couleur des rectangles en cours de tri */
+}

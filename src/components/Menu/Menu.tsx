@@ -11,7 +11,15 @@ import Slider from "@mui/material/Slider";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-function SelectAlgorithm({ algorithm, onAlgorithmChange }) {
+interface SelectAlgorithmProps {
+  algorithm: string;
+  onAlgorithmChange: (arg0: string) => void;
+}
+
+function SelectAlgorithm({
+  algorithm,
+  onAlgorithmChange,
+}: SelectAlgorithmProps) {
   const algorithms: Array<string> = ["Bubble Sort", "Quick Sort"];
   return (
     <div>
@@ -37,15 +45,12 @@ function SelectAlgorithm({ algorithm, onAlgorithmChange }) {
   );
 }
 
-function InputSlider({ sliderValue, onSliderChange }) {
-  const handleBlur = () => {
-    if (sliderValue < 0) {
-      onSliderChange(0);
-    } else if (sliderValue > 100) {
-      onSliderChange(100);
-    }
-  };
+interface InputSliderProps {
+  sliderValue: number;
+  onSliderChange: (value: number) => void;
+}
 
+function InputSlider({ sliderValue, onSliderChange }: InputSliderProps) {
   return (
     <Box sx={{ width: 250 }}>
       <Typography id="input-slider" gutterBottom>
@@ -53,20 +58,28 @@ function InputSlider({ sliderValue, onSliderChange }) {
       </Typography>
       <Slider
         value={typeof sliderValue === "number" ? sliderValue : 0}
-        onChange={(event, newValue) => onSliderChange(newValue)}
+        onChange={(_event: Event, newValue: number) => onSliderChange(newValue)}
         aria-labelledby="input-slider"
       />
     </Box>
   );
 }
 
+interface ResponsiveAppBarProps {
+  algorithm: string;
+  sliderValue: number;
+  onAlgorithmChange: (value: string) => void;
+  onSliderChange: (value: number) => void;
+  onClickSort: () => void;
+}
+
 export default function ResponsiveAppBar({
-  onSliderChange,
+  algorithm,
   sliderValue,
   onAlgorithmChange,
-  algorithm,
+  onSliderChange,
   onClickSort,
-}) {
+}: ResponsiveAppBarProps) {
   return (
     <AppBar
       style={{

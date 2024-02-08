@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import ResponsiveAppBar from "../Menu/Menu.tsx";
-import RenderRectangles from "../Rectangles/Rectangles.tsx";
+import ResponsiveAppBar from "../Menu/Menu";
+import RenderRectangles from "../Rectangles/Rectangles";
 
 function App() {
   const [sliderValue, setSliderValue] = React.useState(30);
@@ -10,12 +10,10 @@ function App() {
   return (
     <>
       <ResponsiveAppBar
-        sliderValue={sliderValue}
-        onSliderChange={(newValue) => {
-          setSliderValue(newValue);
-        }}
         algorithm={algorithm}
-        onAlgorithmChange={(newAlgorithm) => setAlgorithm(newAlgorithm)}
+        sliderValue={sliderValue}
+        onAlgorithmChange={(newAlgorithm: string) => setAlgorithm(newAlgorithm)}
+        onSliderChange={(newValue: number) => setSliderValue(newValue)}
         onClickSort={() => setIsSorting(true)}
       />
       <RenderRectangles

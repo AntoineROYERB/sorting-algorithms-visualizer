@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 require("./Rectangles.css");
-const generateRandomArray = (arraySize, maxValue = 100) => {
+const generateRandomArray = ({ arraySize, maxValue = 100, }) => {
     let randomArray = [];
     let randomNumber;
     for (let i = 0; i < arraySize; i++) {
@@ -37,8 +37,8 @@ const generateRandomArray = (arraySize, maxValue = 100) => {
 const arrayToRectangles = (arr) => {
     return (react_1.default.createElement(react_1.default.Fragment, null, arr.map((rectangleHeight, index) => (react_1.default.createElement("div", { key: index, className: "rectangle", style: { height: `${rectangleHeight}%` } })))));
 };
-const Rectangles = (numRectangles, algorithm) => {
-    const arrayToSort = generateRandomArray(numRectangles);
+const Rectangles = ({ arraySize, algorithm, }) => {
+    const arrayToSort = generateRandomArray({ arraySize });
     let steps = [];
     switch (algorithm) {
         case "Bubble Sort":
@@ -53,7 +53,7 @@ const RenderRectangles = ({ sliderValue, algorithm, isSorting }) => {
     (0, react_1.useEffect)(() => {
         let interval;
         if (isSorting) {
-            const rects = Rectangles(sliderValue, algorithm);
+            const rects = Rectangles({ arraySize: sliderValue, algorithm });
             setRectangles(rects);
             interval = setInterval(() => {
                 setStepIndex((prevStepIndex) => prevStepIndex < rects.length - 1 ? prevStepIndex + 1 : prevStepIndex);
@@ -63,7 +63,7 @@ const RenderRectangles = ({ sliderValue, algorithm, isSorting }) => {
     }, [isSorting, sliderValue, algorithm]);
     return (react_1.default.createElement("div", { className: "container" }, isSorting
         ? rectangles[stepIndex]
-        : arrayToRectangles(generateRandomArray(sliderValue))));
+        : arrayToRectangles(generateRandomArray({ arraySize: sliderValue }))));
 };
 // Bubble Sort algorithm
 function bubbleSort(arr) {

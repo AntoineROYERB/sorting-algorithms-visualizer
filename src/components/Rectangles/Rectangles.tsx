@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./Rectangles.css";
 
-const generateRandomArray = (
-  arraySize: number,
-  maxValue: number = 100
-): number[] => {
+interface GenerateRandomArrayProps {
+  arraySize: number;
+  maxValue?: number;
+}
+
+interface RectanglesProps extends GenerateRandomArrayProps {
+  algorithm: string;
+}
+
+const generateRandomArray = ({
+  arraySize,
+  maxValue = 100,
+}: GenerateRandomArrayProps): number[] => {
   let randomArray: number[] = [];
   let randomNumber: number;
   for (let i = 0; i < arraySize; i++) {
@@ -28,11 +37,11 @@ const arrayToRectangles = (arr: number[]): React.JSX.Element => {
   );
 };
 
-const Rectangles = (
-  numRectangles: number,
-  algorithm: string
-): React.JSX.Element[] => {
-  const arrayToSort = generateRandomArray(numRectangles);
+const Rectangles = ({
+  arraySize,
+  algorithm,
+}: RectanglesProps): React.JSX.Element[] => {
+  const arrayToSort = generateRandomArray({ arraySize });
   let steps: number[][] = [];
 
   switch (algorithm) {
@@ -56,7 +65,7 @@ const RenderRectangles: React.FC<{
     let interval: NodeJS.Timeout;
 
     if (isSorting) {
-      const rects = Rectangles(sliderValue, algorithm);
+      const rects = Rectangles({ arraySize: sliderValue, algorithm });
       setRectangles(rects);
 
       interval = setInterval(() => {
@@ -73,7 +82,7 @@ const RenderRectangles: React.FC<{
     <div className="container">
       {isSorting
         ? rectangles[stepIndex]
-        : arrayToRectangles(generateRandomArray(sliderValue))}
+        : arrayToRectangles(generateRandomArray({ arraySize: sliderValue }))}
     </div>
   );
 };

@@ -48,17 +48,9 @@ function SelectAlgorithm({ algorithm, onAlgorithmChange, }) {
             })))));
 }
 function InputSlider({ sliderValue, onSliderChange }) {
-    const handleBlur = () => {
-        if (sliderValue < 0) {
-            onSliderChange(0);
-        }
-        else if (sliderValue > 100) {
-            onSliderChange(100);
-        }
-    };
     return (React.createElement(Box_1.default, { sx: { width: 250 } },
         React.createElement(Typography_1.default, { id: "input-slider", gutterBottom: true }, "Number of rectangles & speed"),
-        React.createElement(Slider_1.default, { value: typeof sliderValue === "number" ? sliderValue : 0, onChange: (event, newValue) => onSliderChange(newValue), "aria-labelledby": "input-slider" })));
+        React.createElement(Slider_1.default, { value: typeof sliderValue === "number" ? sliderValue : 0, onChange: (_event, newValue) => onSliderChange(newValue), "aria-labelledby": "input-slider" })));
 }
 function ResponsiveAppBar({ algorithm, sliderValue, onAlgorithmChange, onSliderChange, onClickSort, }) {
     return (React.createElement(AppBar_1.default, { style: {

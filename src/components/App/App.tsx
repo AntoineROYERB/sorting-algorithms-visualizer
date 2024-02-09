@@ -20,6 +20,7 @@ function App() {
         sliderValue={sliderValue}
         algorithm={algorithm}
         isSorting={isSorting}
+        onClickSort={setIsSorting}
       />
     </>
   );

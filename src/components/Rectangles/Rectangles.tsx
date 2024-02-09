@@ -6,7 +6,8 @@ interface GenerateRandomArrayProps {
   maxValue?: number;
 }
 
-interface RectanglesProps extends GenerateRandomArrayProps {
+interface RectanglesProps {
+  arrayToSort: number[];
   algorithm: string;
 }
 
@@ -37,11 +38,47 @@ const arrayToRectangles = (arr: number[]): React.JSX.Element => {
   );
 };
 
+const RenderRectangles: React.FC<{
+  sliderValue: number;
+  algorithm: string;
+  isSorting: boolean;
+  onClickSort: (bool: boolean) => void;
+}> = ({ sliderValue, algorithm, isSorting }) => {
+  const arrayToSort = generateRandomArray({ arraySize: sliderValue });
+  const [stepIndex, setStepIndex] = useState(0);
+  const [rectangles, setRectangles] = useState<React.JSX.Element[]>([
+    arrayToRectangles(arrayToSort),
+  ]);
+  useEffect(() => {
+    const arrayToSort = generateRandomArray({ arraySize: sliderValue });
+    setRectangles([arrayToRectangles(arrayToSort)]);
+  }, [sliderValue]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isSorting) {
+      const rects = Rectangles({ arrayToSort: arrayToSort, algorithm });
+      setRectangles(rects);
+
+      // Start animation loop
+      interval = setInterval(() => {
+        setStepIndex((prevStepIndex) =>
+          prevStepIndex < rects.length - 1 ? prevStepIndex + 1 : prevStepIndex
+        );
+      }, 30);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isSorting]);
+  return <div className="container">{rectangles[stepIndex]}</div>;
+};
+
 const Rectangles = ({
-  arraySize,
   algorithm,
+  arrayToSort,
 }: RectanglesProps): React.JSX.Element[] => {
-  const arrayToSort = generateRandomArray({ arraySize });
   let steps: number[][] = [];
 
   switch (algorithm) {
@@ -53,39 +90,6 @@ const Rectangles = ({
   return rectangles;
 };
 
-const RenderRectangles: React.FC<{
-  sliderValue: number;
-  algorithm: string;
-  isSorting: boolean;
-}> = ({ sliderValue, algorithm, isSorting }) => {
-  const [stepIndex, setStepIndex] = useState(0);
-  const [rectangles, setRectangles] = useState<React.JSX.Element[]>([]);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-
-    if (isSorting) {
-      const rects = Rectangles({ arraySize: sliderValue, algorithm });
-      setRectangles(rects);
-
-      interval = setInterval(() => {
-        setStepIndex((prevStepIndex) =>
-          prevStepIndex < rects.length - 1 ? prevStepIndex + 1 : prevStepIndex
-        );
-      }, 30);
-    }
-
-    return () => clearInterval(interval);
-  }, [isSorting, sliderValue, algorithm]);
-
-  return (
-    <div className="container">
-      {isSorting
-        ? rectangles[stepIndex]
-        : arrayToRectangles(generateRandomArray({ arraySize: sliderValue }))}
-    </div>
-  );
-};
 // Bubble Sort algorithm
 function bubbleSort(arr: number[]): number[][] {
   const steps: number[][] = [[...arr]];

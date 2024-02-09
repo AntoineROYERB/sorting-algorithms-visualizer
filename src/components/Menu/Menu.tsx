@@ -16,6 +16,11 @@ interface SelectAlgorithmProps {
   onAlgorithmChange: (arg0: string) => void;
 }
 
+interface InputSliderProps {
+  sliderValue: number;
+  onSliderChange: (value: number) => void;
+}
+
 function SelectAlgorithm({
   algorithm,
   onAlgorithmChange,
@@ -43,11 +48,6 @@ function SelectAlgorithm({
       </FormControl>
     </div>
   );
-}
-
-interface InputSliderProps {
-  sliderValue: number;
-  onSliderChange: (value: number) => void;
 }
 
 function InputSlider({ sliderValue, onSliderChange }: InputSliderProps) {

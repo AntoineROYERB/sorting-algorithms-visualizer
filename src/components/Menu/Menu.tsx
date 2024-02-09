@@ -25,7 +25,11 @@ function SelectAlgorithm({
   algorithm,
   onAlgorithmChange,
 }: SelectAlgorithmProps) {
-  const algorithms: Array<string> = ["Bubble Sort", "Quick Sort"];
+  const algorithms: Array<string> = [
+    "Bubble Sort",
+    "Selection Sort",
+    "Insertion Sort",
+  ];
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 120 }}>

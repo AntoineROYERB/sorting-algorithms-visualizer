@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import ResponsiveAppBar from "../Menu/Menu";
-import RenderRectangles from "../Rectangles/Rectangles";
+import Rectangles from "../Rectangles/Rectangles";
 
 function App() {
   const [sliderValue, setSliderValue] = React.useState(30);
@@ -16,7 +16,7 @@ function App() {
         onSliderChange={(newValue: number) => setSliderValue(newValue)}
         onClickSort={() => setIsSorting(true)}
       />
-      <RenderRectangles
+      <Rectangles
         sliderValue={sliderValue}
         algorithm={algorithm}
         isSorting={isSorting}

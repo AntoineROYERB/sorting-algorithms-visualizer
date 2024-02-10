@@ -18,7 +18,6 @@ interface RectanglesProps {
   sliderValue: number;
   algorithm: string;
   isSorting: boolean;
-  onClickSort: (bool: boolean) => void;
 }
 
 const generateRandomArray = ({
@@ -52,13 +51,13 @@ const Rectangles = ({
   sliderValue,
   algorithm,
   isSorting,
-}: // onClickSort,
-RectanglesProps): React.JSX.Element => {
+}: RectanglesProps): React.JSX.Element => {
   const arrayToSort = generateRandomArray({ arraySize: sliderValue });
   const [stepIndex, setStepIndex] = useState(0);
   const [rectangles, setRectangles] = useState<React.JSX.Element[]>([
     arrayToRectangles(arrayToSort),
   ]);
+
   useEffect(() => {
     const arrayToSort = generateRandomArray({ arraySize: sliderValue });
     setRectangles([arrayToRectangles(arrayToSort)]);
@@ -87,6 +86,7 @@ RectanglesProps): React.JSX.Element => {
       clearInterval(interval);
     };
   }, [isSorting]);
+
   return <div className="container">{rectangles[stepIndex]}</div>;
 };
 

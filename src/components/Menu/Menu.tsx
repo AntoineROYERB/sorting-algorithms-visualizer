@@ -62,7 +62,9 @@ function InputSlider({ sliderValue, onSliderChange }: InputSliderProps) {
       </Typography>
       <Slider
         value={typeof sliderValue === "number" ? sliderValue : 0}
-        onChange={(_event: Event, newValue: number) => onSliderChange(newValue)}
+        onChange={(_event: Event, newValue: number | number[]) =>
+          onSliderChange(newValue as number)
+        }
         aria-labelledby="input-slider"
       />
     </Box>

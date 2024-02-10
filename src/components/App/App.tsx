@@ -7,6 +7,11 @@ function App() {
   const [sliderValue, setSliderValue] = React.useState(30);
   const [algorithm, setAlgorithm] = React.useState("Bubble Sort");
   const [isSorting, setIsSorting] = React.useState(false);
+
+  const handleSortButtonClick = () => {
+    setIsSorting(!isSorting);
+  };
+
   return (
     <>
       <ResponsiveAppBar
@@ -14,13 +19,12 @@ function App() {
         sliderValue={sliderValue}
         onAlgorithmChange={(newAlgorithm: string) => setAlgorithm(newAlgorithm)}
         onSliderChange={(newValue: number) => setSliderValue(newValue)}
-        onClickSort={() => setIsSorting(true)}
+        onClickSort={() => handleSortButtonClick()}
       />
       <Rectangles
         sliderValue={sliderValue}
         algorithm={algorithm}
         isSorting={isSorting}
-        onClickSort={setIsSorting}
       />
     </>
   );

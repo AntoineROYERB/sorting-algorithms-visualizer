@@ -58,20 +58,27 @@ const Rectangles = ({
     arrayToRectangles(arrayToSort),
   ]);
 
+  // const onTimerTick() :void => void {
+  //   setStepIndex((prevStepIndex : number) =>
+  //   prevStepIndex < rectangles.length - 1
+  //     ? prevStepIndex + 1
+  //     : prevStepIndex
+  // );
+  // }
+
   useEffect(() => {
     const arrayToSort = generateRandomArray({ arraySize: sliderValue });
-    setRectangles([arrayToRectangles(arrayToSort)]);
-  }, [sliderValue]);
+    const rectangles = generateAlgorithmSteps({
+      algorithm,
+      arrayToSort: arrayToSort,
+    });
+    setRectangles(rectangles);
+  }, [sliderValue, algorithm]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (isSorting) {
-      const rectangles = generateAlgorithmSteps({
-        algorithm,
-        arrayToSort,
-      });
-      setRectangles(rectangles);
 
+    if (isSorting) {
       // Start animation loop
       interval = setInterval(() => {
         setStepIndex((prevStepIndex) =>

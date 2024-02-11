@@ -11,7 +11,7 @@ function App() {
   const handleSortButtonClick = () => {
     setIsSorting(!isSorting);
   };
-
+  console.log(algorithm);
   return (
     <>
       <ResponsiveAppBar

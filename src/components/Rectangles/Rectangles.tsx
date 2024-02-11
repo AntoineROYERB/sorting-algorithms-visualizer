@@ -78,14 +78,18 @@ const Rectangles = ({
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
+    function onTimerTick() {
+      setStepIndex((prevStepIndex) =>
+        prevStepIndex < rectangles.length - 1
+          ? prevStepIndex + 1
+          : prevStepIndex
+      );
+    }
+
     if (isSorting) {
       // Start animation loop
       interval = setInterval(() => {
-        setStepIndex((prevStepIndex) =>
-          prevStepIndex < rectangles.length - 1
-            ? prevStepIndex + 1
-            : prevStepIndex
-        );
+        onTimerTick();
       }, 30);
     }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Rectangles.css";
 
 interface AlgorithmProps {
@@ -18,6 +18,7 @@ interface RectanglesProps {
   sliderValue: number;
   algorithm: string;
   isSorting: boolean;
+  handleSort: () => void;
 }
 
 const generateRandomArray = ({
@@ -51,6 +52,7 @@ const Rectangles = ({
   sliderValue,
   algorithm,
   isSorting,
+  handleSort,
 }: RectanglesProps): React.JSX.Element => {
   const arrayToSort = generateRandomArray({ arraySize: sliderValue });
   const [stepIndex, setStepIndex] = useState(0);
@@ -58,13 +60,11 @@ const Rectangles = ({
     arrayToRectangles(arrayToSort),
   ]);
 
-  // const onTimerTick() :void => void {
-  //   setStepIndex((prevStepIndex : number) =>
-  //   prevStepIndex < rectangles.length - 1
-  //     ? prevStepIndex + 1
-  //     : prevStepIndex
-  // );
-  // }
+  const stepIndexRef = useRef(stepIndex);
+
+  useEffect(() => {
+    stepIndexRef.current = stepIndex;
+  }, [stepIndex]);
 
   useEffect(() => {
     const arrayToSort = generateRandomArray({ arraySize: sliderValue });
@@ -73,26 +73,35 @@ const Rectangles = ({
       arrayToSort: arrayToSort,
     });
     setRectangles(rectangles);
+    setStepIndex(0);
+    if (isSorting) {
+      handleSort();
+    }
   }, [sliderValue, algorithm]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
     function onTimerTick() {
-      setStepIndex((prevStepIndex) =>
-        prevStepIndex < rectangles.length - 1
-          ? prevStepIndex + 1
-          : prevStepIndex
-      );
+      const currentStepIndex = stepIndexRef.current;
+      // If stepIndex reaches the last step, stop sorting
+      if (currentStepIndex === rectangles.length - 1) {
+        handleSort();
+      } else {
+        setStepIndex((prevStepIndex) =>
+          prevStepIndex < rectangles.length - 1
+            ? prevStepIndex + 1
+            : prevStepIndex
+        );
+      }
     }
 
-    if (isSorting) {
+    if (isSorting && stepIndexRef.current < rectangles.length - 1) {
       // Start animation loop
       interval = setInterval(() => {
         onTimerTick();
       }, 30);
     }
-
     return () => {
       clearInterval(interval);
     };
@@ -126,7 +135,6 @@ const generateAlgorithmSteps = ({
   return rectangles;
 };
 
-// Bubble Sort algorithm
 function bubbleSort({ arrayToSort }: AlgorithmProps): number[][] {
   const steps: number[][] = [[...arrayToSort]];
   for (var i = 0; i < arrayToSort.length; i++) {

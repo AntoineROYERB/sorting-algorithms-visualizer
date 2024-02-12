@@ -20,6 +20,7 @@ function App() {
         onAlgorithmChange={(newAlgorithm: string) => setAlgorithm(newAlgorithm)}
         onSliderChange={(newValue: number) => setSliderValue(newValue)}
         onClickSort={() => handleSortButtonClick()}
+        isSorting={isSorting}
       />
       <Rectangles
         sliderValue={sliderValue}

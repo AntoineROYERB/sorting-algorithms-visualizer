@@ -10,6 +10,8 @@ import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
+import SaveIcon from "@mui/icons-material/Save";
 
 interface SelectAlgorithmProps {
   algorithm: string;
@@ -58,7 +60,7 @@ function InputSlider({ sliderValue, onSliderChange }: InputSliderProps) {
   return (
     <Box sx={{ width: 250 }}>
       <Typography id="input-slider" gutterBottom>
-        Number of rectangles & speed
+        Number of rectangles :
       </Typography>
       <Slider
         value={typeof sliderValue === "number" ? sliderValue : 0}
@@ -77,6 +79,7 @@ interface ResponsiveAppBarProps {
   onAlgorithmChange: (value: string) => void;
   onSliderChange: (value: number) => void;
   onClickSort: () => void;
+  isSorting: boolean;
 }
 
 export default function ResponsiveAppBar({
@@ -85,6 +88,7 @@ export default function ResponsiveAppBar({
   onAlgorithmChange,
   onSliderChange,
   onClickSort,
+  isSorting,
 }: ResponsiveAppBarProps) {
   return (
     <AppBar
@@ -107,9 +111,22 @@ export default function ResponsiveAppBar({
             sliderValue={sliderValue}
             onSliderChange={onSliderChange}
           />
-          <Button variant="contained" color="success" onClick={onClickSort}>
-            SORT
-          </Button>
+
+          {isSorting ? (
+            <LoadingButton
+              loading
+              loadingPosition="start"
+              startIcon={<SaveIcon />}
+              variant="outlined"
+            >
+              SORTING
+            </LoadingButton>
+          ) : (
+            <Button variant="contained" color="success" onClick={onClickSort}>
+              SORT
+            </Button>
+          )}
+
           <SelectAlgorithm
             algorithm={algorithm}
             onAlgorithmChange={onAlgorithmChange}

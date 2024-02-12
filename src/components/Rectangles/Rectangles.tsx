@@ -38,15 +38,26 @@ const generateRandomArray = ({
 };
 
 const arrayToRectangles = (arr: number[]): React.JSX.Element => {
+  console.log(arr.length);
   return (
     <>
       {arr.map((rectangleHeight, index) => (
         <div
           key={index}
           className="rectangle"
-          style={{ height: `${rectangleHeight + 1}%` }}
+          style={{
+            height: `${rectangleHeight + 1}%`,
+          }}
         >
-          {rectangleHeight}
+          {arr.length < 40 ? (
+            <div
+              style={{
+                fontSize: `${80}%`,
+              }}
+            >
+              {rectangleHeight}
+            </div>
+          ) : null}
         </div>
       ))}
     </>

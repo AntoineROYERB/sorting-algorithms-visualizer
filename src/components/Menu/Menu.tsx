@@ -32,24 +32,21 @@ function SelectAlgorithm({
     "Selection Sort",
     "Insertion Sort",
   ];
+
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">Algorithm</InputLabel>
+      <FormControl sx={{ m: 1, minWidth: 160 }}>
+        <InputLabel>Algorithm</InputLabel>
         <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={typeof algorithm === "string" ? algorithm : ""}
-          label="Algorithm"
+          value={algorithm}
           onChange={(event) => onAlgorithmChange(event.target.value as string)}
+          label="Algorithm"
         >
-          {algorithms.map((algorithm) => {
-            return (
-              <MenuItem key={algorithm} value={algorithm}>
-                {algorithm}
-              </MenuItem>
-            );
-          })}
+          {algorithms.map((algorithm) => (
+            <MenuItem key={algorithm} value={algorithm}>
+              {algorithm}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
@@ -126,7 +123,6 @@ export default function ResponsiveAppBar({
               SORT
             </Button>
           )}
-
           <SelectAlgorithm
             algorithm={algorithm}
             onAlgorithmChange={onAlgorithmChange}

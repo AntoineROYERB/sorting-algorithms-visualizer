@@ -11,6 +11,7 @@ interface generateAlgorithmStepsProps extends AlgorithmProps {
 
 interface GenerateRandomArrayProps {
   arraySize: number;
+  minValue?: number;
   maxValue?: number;
 }
 
@@ -23,12 +24,14 @@ interface RectanglesProps {
 
 const generateRandomArray = ({
   arraySize,
+  minValue = 1,
   maxValue = 100,
 }: GenerateRandomArrayProps): number[] => {
   let randomArray: number[] = [];
   let randomNumber: number;
   for (let i = 0; i < arraySize; i++) {
-    randomNumber = Math.floor(Math.random() * (maxValue + 1));
+    randomNumber =
+      Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
     randomArray.push(randomNumber);
   }
   return randomArray;
@@ -41,8 +44,10 @@ const arrayToRectangles = (arr: number[]): React.JSX.Element => {
         <div
           key={index}
           className="rectangle"
-          style={{ height: `${rectangleHeight}%` }}
-        ></div>
+          style={{ height: `${rectangleHeight + 1}%` }}
+        >
+          {rectangleHeight}
+        </div>
       ))}
     </>
   );

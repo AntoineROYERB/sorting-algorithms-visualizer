@@ -37,32 +37,29 @@ const generateRandomArray = ({
   return randomArray;
 };
 
-const arrayToRectangles = (arr: number[]): React.JSX.Element => {
-  console.log(arr.length);
-  return (
-    <>
-      {arr.map((rectangleHeight, index) => (
-        <div
-          key={index}
-          className="rectangle"
-          style={{
-            height: `${rectangleHeight + 1}%`,
-          }}
-        >
-          {arr.length < 40 ? (
-            <div
-              style={{
-                fontSize: `${80}%`,
-              }}
-            >
-              {rectangleHeight}
-            </div>
-          ) : null}
-        </div>
-      ))}
-    </>
-  );
-};
+const arrayToRectangles = (arr: number[]): React.JSX.Element => (
+  <>
+    {arr.map((rectangleHeight, index) => (
+      <div
+        key={index}
+        className="rectangle"
+        style={{
+          height: `${rectangleHeight + 1}%`,
+        }}
+      >
+        {arr.length < 40 ? (
+          <div
+            style={{
+              fontSize: `${80}%`,
+            }}
+          >
+            {rectangleHeight}
+          </div>
+        ) : null}
+      </div>
+    ))}
+  </>
+);
 
 const Rectangles = ({
   sliderValue,

@@ -20,6 +20,10 @@
   text-align: center;
 }
 
+.yellow {
+  background-color: yellow;
+}
+
 .rectangle.active {
   background-color: red; /* Couleur des rectangles en cours de tri */
 }

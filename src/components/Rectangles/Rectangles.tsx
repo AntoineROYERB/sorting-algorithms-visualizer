@@ -37,29 +37,44 @@ const generateRandomArray = ({
   return randomArray;
 };
 
-const arrayToRectangles = (arr: number[]): React.JSX.Element => (
-  <>
-    {arr.map((rectangleHeight, index) => (
-      <div
-        key={index}
-        className="rectangle"
-        style={{
-          height: `${rectangleHeight + 1}%`,
-        }}
-      >
-        {arr.length < 40 ? (
+const arrayToRectangles = (
+  arr: number[],
+  booleanArray?: boolean[]
+): React.JSX.Element => {
+  if (!booleanArray) {
+    booleanArray = Array(arr.length).fill(false);
+  }
+  return (
+    <>
+      {arr.map((rectangleHeight, index) => {
+        let heightHasChange = booleanArray![index];
+        let rectangleClass = "rectangle";
+        if (heightHasChange) {
+          rectangleClass += " yellow";
+        }
+        return (
           <div
+            key={index}
+            className={rectangleClass}
             style={{
-              fontSize: `${80}%`,
+              height: `${rectangleHeight + 1}%`,
             }}
           >
-            {rectangleHeight}
+            {arr.length < 40 ? (
+              <div
+                style={{
+                  fontSize: `${80}%`,
+                }}
+              >
+                {rectangleHeight}
+              </div>
+            ) : null}
           </div>
-        ) : null}
-      </div>
-    ))}
-  </>
-);
+        );
+      })}
+    </>
+  );
+};
 
 const Rectangles = ({
   sliderValue,
@@ -129,6 +144,15 @@ const generateAlgorithmSteps = ({
 }: generateAlgorithmStepsProps): React.JSX.Element[] => {
   let steps: number[][] = [];
 
+  const detectPositionChanges = (steps: number[][]): boolean[][] =>
+    steps.map((step, index) => {
+      if (index === 0) {
+        return step.map(() => false);
+      }
+      const previousStep = steps[index - 1];
+      return step.map((value, i) => value !== previousStep[i]);
+    });
+
   switch (algorithm) {
     case "Bubble Sort":
       steps = bubbleSort({ arrayToSort });
@@ -144,7 +168,10 @@ const generateAlgorithmSteps = ({
       steps = selectionSort({ arrayToSort });
   }
 
-  const rectangles = steps.map((step: number[]) => arrayToRectangles(step));
+  const positionChanges = detectPositionChanges(steps);
+  const rectangles = steps.map((step: number[], index: number) =>
+    arrayToRectangles(step, positionChanges[index])
+  );
   return rectangles;
 };
 

@@ -18,12 +18,19 @@
   margin-left: 10px;
   background-color: rgba(66, 134, 244, 0.8);
   text-align: center;
+  color: white;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #ffd700;
 }
 
 .green {
   background-color: #2e7d32;
 }
+
+/* @media (prefers-color-scheme: dark) {
+  .yellow {
+    background-color: purple;
+  }
+} */

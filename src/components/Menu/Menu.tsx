@@ -36,11 +36,12 @@ function SelectAlgorithm({
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 160 }}>
-        <InputLabel>Algorithm</InputLabel>
+        <InputLabel sx={{ color: "white" }}>Algorithm</InputLabel>
         <Select
           value={algorithm}
           onChange={(event) => onAlgorithmChange(event.target.value as string)}
           label="Algorithm"
+          sx={{ color: "white" }}
         >
           {algorithms.map((algorithm) => (
             <MenuItem key={algorithm} value={algorithm}>

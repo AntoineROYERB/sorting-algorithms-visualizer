@@ -24,6 +24,6 @@
   background-color: yellow;
 }
 
-.rectangle.active {
-  background-color: red; /* Couleur des rectangles en cours de tri */
+.green {
+  background-color: #2e7d32;
 }

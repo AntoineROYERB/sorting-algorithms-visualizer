@@ -39,18 +39,26 @@ const generateRandomArray = ({
 
 const arrayToRectangles = (
   arr: number[],
-  booleanArray?: boolean[]
+  booleanArray?: boolean[],
+  arraySorted?: number[]
 ): React.JSX.Element => {
   if (!booleanArray) {
     booleanArray = Array(arr.length).fill(false);
+  }
+  if (!arraySorted) {
+    arraySorted = Array(arr.length).fill(-1);
   }
   return (
     <>
       {arr.map((rectangleHeight, index) => {
         let heightHasChange = booleanArray![index];
+        let isAtGoodPosition = rectangleHeight == arraySorted![index];
         let rectangleClass = "rectangle";
         if (heightHasChange) {
           rectangleClass += " yellow";
+        }
+        if (isAtGoodPosition) {
+          rectangleClass += " green";
         }
         return (
           <div
@@ -169,8 +177,10 @@ const generateAlgorithmSteps = ({
   }
 
   const positionChanges = detectPositionChanges(steps);
+  const arraySorted = steps[steps.length - 1];
+
   const rectangles = steps.map((step: number[], index: number) =>
-    arrayToRectangles(step, positionChanges[index])
+    arrayToRectangles(step, positionChanges[index], arraySorted)
   );
   return rectangles;
 };

@@ -78,6 +78,8 @@ interface ResponsiveAppBarProps {
   onSliderChange: (value: number) => void;
   onClickSort: () => void;
   isSorting: boolean;
+  onClickShuffle: () => void;
+  isSorted: boolean;
 }
 
 export default function ResponsiveAppBar({
@@ -87,6 +89,8 @@ export default function ResponsiveAppBar({
   onSliderChange,
   onClickSort,
   isSorting,
+  onClickShuffle,
+  isSorted,
 }: ResponsiveAppBarProps) {
   return (
     <AppBar
@@ -119,6 +123,14 @@ export default function ResponsiveAppBar({
             >
               SORTING
             </LoadingButton>
+          ) : isSorted ? (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={onClickShuffle}
+            >
+              SHUFFLE
+            </Button>
           ) : (
             <Button variant="contained" color="success" onClick={onClickSort}>
               SORT

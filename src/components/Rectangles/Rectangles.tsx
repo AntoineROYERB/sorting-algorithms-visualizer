@@ -20,6 +20,8 @@ interface RectanglesProps {
   algorithm: string;
   isSorting: boolean;
   handleSort: () => void;
+  handleIsSorted: () => void;
+  isSorted: boolean;
 }
 
 const generateRandomArray = ({
@@ -89,6 +91,8 @@ const Rectangles = ({
   algorithm,
   isSorting,
   handleSort,
+  handleIsSorted,
+  isSorted,
 }: RectanglesProps): React.JSX.Element => {
   const arrayToSort = generateRandomArray({ arraySize: sliderValue });
   const [stepIndex, setStepIndex] = useState(0);
@@ -113,6 +117,9 @@ const Rectangles = ({
     if (isSorting) {
       handleSort();
     }
+    if (isSorted) {
+      handleIsSorted();
+    }
   }, [sliderValue, algorithm]);
 
   useEffect(() => {
@@ -123,6 +130,7 @@ const Rectangles = ({
       // If stepIndex reaches the last step, stop sorting
       if (currentStepIndex === rectangles.length - 1) {
         handleSort();
+        handleIsSorted();
       } else {
         setStepIndex((prevStepIndex) =>
           prevStepIndex < rectangles.length - 1
@@ -142,6 +150,18 @@ const Rectangles = ({
       clearInterval(interval);
     };
   }, [isSorting]);
+
+  useEffect(() => {
+    if (!isSorted) {
+      const arrayToSort = generateRandomArray({ arraySize: sliderValue });
+      const rectangles = generateAlgorithmSteps({
+        algorithm,
+        arrayToSort: arrayToSort,
+      });
+      setRectangles(rectangles);
+      setStepIndex(0);
+    }
+  }, [isSorted]);
 
   return <div className="container">{rectangles[stepIndex]}</div>;
 };

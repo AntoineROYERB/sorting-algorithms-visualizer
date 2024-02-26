@@ -8,7 +8,6 @@
   display: flex;
   max-width: 70%;
   height: 40em;
-  /* border: red solid 2px; */
 }
 
 .rectangle {
@@ -28,9 +27,3 @@
 .green {
   background-color: #2e7d32;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .yellow {
-    background-color: purple;
-  }
-} */
